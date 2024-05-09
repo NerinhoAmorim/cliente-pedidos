@@ -1,5 +1,8 @@
 package br.com.farmaciaindiana.clientepedidos.cliente.application.api;
 
+import java.util.List;
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +24,24 @@ public class ClienteController implements ClienteAPI {
 		log.info("[finaliza] ClienteController - postCliente" );	
 		return clienteCriado;
 	}
+
+	@Override
+	public List<ClienteListResponse> getTodosClientes() {
+		log.info("[inicio] ClienteController - getTodosClientes");
+		List<ClienteListResponse> clientes = clienteService.buscaTodosClientes();
+		log.info("[finaliza] ClienteController - getTodosClientes");
+		return clientes;
+	}
+
+	@Override
+	public ClienteDetalhadoResponse getClientesAtravesId(UUID idCliente) {
+		log.info("[inicio] ClienteController - getClientesAtravesId");
+		log.info("[idCliente] {}", idCliente);
+		ClienteDetalhadoResponse clienteDetalhado = clienteService.bucaClientesAtravesId(idCliente);
+		log.info("[finaliza] ClienteController - getClientesAtravesId");
+		return clienteDetalhado;
+	}
+
+	
 
 }
