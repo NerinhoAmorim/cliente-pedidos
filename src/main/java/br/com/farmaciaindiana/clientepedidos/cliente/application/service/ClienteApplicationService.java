@@ -39,8 +39,10 @@ public class ClienteApplicationService implements ClienteService {
 
 	@Override
 	public ClienteDetalhadoResponse bucaClientesAtravesId(UUID idCliente) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("[inicia] ClienteApplicationService - buscaClientesAtravesId");
+		Cliente cliente = clienteRepository.buscaClientesAtravesId(idCliente);
+		log.info("[finaliza] ClienteApplicationService - buscaClientesAtravesId");
+		return new ClienteDetalhadoResponse(cliente);
 	}
 
 }
