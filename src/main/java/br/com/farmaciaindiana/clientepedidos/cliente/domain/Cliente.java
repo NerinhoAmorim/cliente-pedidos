@@ -14,11 +14,10 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.farmaciaindiana.clientepedidos.cliente.application.api.ClienteRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -44,18 +43,15 @@ public class Cliente {
 	private LocalDateTime dataHoraDoCadastro;
 	private LocalDateTime dataHoraDaUltimaAlteracao;
 
-	public Cliente(UUID idCliente, @NotBlank String nomeCompleto, @Email @NotBlank String email, @CPF String cpf,
-			Genero genero, LocalDate dataNascimento, String telefone, Endereco endereco, Boolean aceitaTermos,
-			LocalDate dataHoraDoCadastro, LocalDate dataHoraDaUltimaAlteracao) {
-		this.idCliente = idCliente;
-		this.nomeCompleto = nomeCompleto;
-		this.email = email;
-		this.cpf = cpf;
-		this.genero = genero;
-		this.dataNascimento = dataNascimento;
-		this.telefone = telefone;
-		this.endereco = endereco;
-		this.aceitaTermos = aceitaTermos;
+	public Cliente(ClienteRequest clientteRequest) {
+		this.nomeCompleto = clientteRequest.getNomeCompleto();
+		this.email = clientteRequest.getEmail();
+		this.cpf = clientteRequest.getCpf();
+		this.genero = clientteRequest.getGenero();
+		this.dataNascimento = clientteRequest.getDataNascimento();
+		this.telefone = clientteRequest.getTelefone();
+		this.endereco = clientteRequest.getEndereco();
+		this.aceitaTermos = clientteRequest.getAceitaTermos();
 		this.dataHoraDoCadastro = LocalDateTime.now();
 	}
 
