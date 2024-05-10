@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.farmaciaindiana.clientepedidos.cliente.application.api.ClienteAlteracaoRequest;
 import br.com.farmaciaindiana.clientepedidos.cliente.application.api.ClienteDetalhadoResponse;
 import br.com.farmaciaindiana.clientepedidos.cliente.application.api.ClienteListResponse;
 import br.com.farmaciaindiana.clientepedidos.cliente.application.api.ClienteRequest;
@@ -39,8 +40,31 @@ public class ClienteApplicationService implements ClienteService {
 
 	@Override
 	public ClienteDetalhadoResponse bucaClientesAtravesId(UUID idCliente) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("[inicia] ClienteApplicationService - buscaClientesAtravesId");
+		Cliente cliente = clienteRepository.buscaClientesAtravesId(idCliente);
+		log.info("[finaliza] ClienteApplicationService - buscaClientesAtravesId");
+		return new ClienteDetalhadoResponse(cliente);
+	}
+
+	@Override
+	public void deletaClientePorId(UUID idCliente) {
+		log.info("[inicia] ClienteApplicationService - deletaClientesPorId");
+		Cliente cliente = clienteRepository.buscaClientesAtravesId(idCliente);
+		clienteRepository.deletaCliente(cliente);
+		log.info("[finaliza] ClienteApplicationService - deletaClientesPorId");
+
+		
+	}
+
+	@Override
+	public void patcAlteraCliente(UUID idCliente, ClienteAlteracaoRequest clienteAlteracaoRequest) {
+		log.info("[inicia] ClienteApplicationService - patcAlteraCliente");
+		Cliente cliente = clienteRepository.buscaClientesAtravesId(idCliente);
+		cliente.altera(clienteAlteracaoRequest);
+		clienteRepository.salva(cliente);
+		log.info("[finaliza] ClienteApplicationService - patcAlteraCliente");
+
+		
 	}
 
 }
