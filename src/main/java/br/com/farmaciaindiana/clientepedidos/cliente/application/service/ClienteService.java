@@ -11,7 +11,7 @@ import br.com.farmaciaindiana.clientepedidos.cliente.application.api.ClienteResp
 
 public interface ClienteService {
 
-	ClienteResponse criaCliente(ClienteRequest clientteRequest);
+	ClienteResponse criaCliente(ClienteRequest clienteRequest);
 	List<ClienteListResponse> buscaTodosClientes();
 	ClienteDetalhadoResponse bucaClientesAtravesId(UUID idCliente);
 	void deletaClientePorId(UUID idCliente);
